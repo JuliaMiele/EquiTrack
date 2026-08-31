@@ -1,37 +1,60 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>EquiTrack – Pferdemanagement</title>
+
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
     <header>
-        <h1>EquiTrack</h1>
-        <p>wichtige Infos zu deinem Hotti an einem Ort</p>
+        <a th:href="@{/}">EquiTrack</a>
+
+        <nav>
+            <a th:href="@{/}">Startseite</a>
+            <a th:href="@{/horses}">Meine Pferde</a>
+        </nav>
     </header>
 
     <main>
         <section>
-            <h2>Willkommen</h2>
+            <p>Pferdemanagement einfach gemacht</p>
+
+            <h1>Alles Wichtige zu deinen Pferden an einem Ort.</h1>
 
             <p>
-                Verwalte Pferdeprofile, Termine & wichtige
-                Gesundheitsinformationen übersichtlich.
+                EquiTrack hilft dabei, Pferdeprofile, Termine und
+                Gesundheitsinformationen übersichtlich zu verwalten.
             </p>
+
+            <a th:href="@{/horses}">
+                Pferdeübersicht öffnen
+            </a>
         </section>
 
         <section>
-            <h2>Übersicht</h2>
+            <h2>Was EquiTrack bietet</h2>
 
             <ul>
-                <li>Pferde verwalten</li>
-                <li>Tierarzttermine im Blick behalten</li>
-                <li>Hufschmiedtermine dokumentieren</li>
-                <li>Überfällige Termine erkennen</li>
+                <li>Pferdeprofile zentral verwalten</li>
+                <li>Stammdaten und Besonderheiten dokumentieren</li>
+                <li>Profile jederzeit bearbeiten</li>
+                <li>Daten dauerhaft lokal speichern</li>
             </ul>
+        </section>
+
+        <section>
+            <h2>Als Nächstes geplant</h2>
+
+            <p>
+                Im nächsten Entwicklungsschritt werden Tierarzt-,
+                Hufschmied- und Impftermine ergänzt. Überfällige
+                Termine sollen anschließend automatisch hervorgehoben
+                werden.
+            </p>
         </section>
     </main>
 </body>

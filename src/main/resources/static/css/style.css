@@ -1,0 +1,301 @@
+:root {
+    --forest: #234438;
+    --forest-dark: #183028;
+    --sage: #789382;
+    --cream: #f7f3e9;
+    --paper: #fffdf8;
+    --terracotta: #b86645;
+    --terracotta-dark: #914b32;
+    --text: #25302b;
+    --muted: #68736d;
+    --border: #d9ded8;
+    --danger: #a43f3f;
+    --shadow: 0 18px 45px rgba(31, 56, 46, 0.12);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background:
+        radial-gradient(circle at top right, #dce6dc 0, transparent 32%),
+        var(--cream);
+    color: var(--text);
+    font-family:
+        Inter, system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+    line-height: 1.65;
+}
+
+a {
+    color: var(--forest);
+    font-weight: 700;
+    text-underline-offset: 4px;
+}
+
+header {
+    min-height: 72px;
+    padding: 0 max(24px, calc((100% - 1100px) / 2));
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    background: rgba(255, 253, 248, 0.92);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(14px);
+}
+
+header > a {
+    color: var(--forest);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.6rem;
+    text-decoration: none;
+}
+
+nav {
+    display: flex;
+    gap: 24px;
+}
+
+nav a {
+    color: var(--muted);
+    font-size: 0.95rem;
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: var(--terracotta);
+}
+
+main {
+    width: min(calc(100% - 40px), 1100px);
+    margin: 0 auto;
+    padding: 72px 0 100px;
+}
+
+main > header {
+    padding: 0;
+    background: transparent;
+    border: 0;
+}
+
+h1,
+h2,
+h3 {
+    margin-top: 0;
+    color: var(--forest-dark);
+    font-family: Georgia, "Times New Roman", serif;
+    line-height: 1.15;
+}
+
+h1 {
+    margin-bottom: 24px;
+    font-size: clamp(2.7rem, 7vw, 5rem);
+    letter-spacing: -0.04em;
+}
+
+h2 {
+    font-size: clamp(1.7rem, 4vw, 2.5rem);
+}
+
+p {
+    max-width: 720px;
+}
+
+main > section {
+    margin-bottom: 38px;
+    padding: clamp(24px, 5vw, 44px);
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    box-shadow: var(--shadow);
+}
+
+main > section:first-child {
+    background:
+        linear-gradient(135deg, rgba(35, 68, 56, 0.97), rgba(52, 91, 76, 0.92));
+    color: white;
+}
+
+main > section:first-child h1,
+main > section:first-child h2 {
+    color: white;
+}
+
+main > section:first-child a {
+    display: inline-flex;
+    min-height: 46px;
+    align-items: center;
+    padding: 0 20px;
+    border-radius: 10px;
+    background: var(--terracotta);
+    color: white;
+    text-decoration: none;
+}
+
+main > section:first-child a:hover {
+    background: var(--terracotta-dark);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow: hidden;
+}
+
+th,
+td {
+    padding: 16px 14px;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+    vertical-align: middle;
+}
+
+th {
+    color: var(--forest);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+tbody tr:hover {
+    background: #f5f8f4;
+}
+
+td form {
+    display: inline;
+    margin-left: 10px;
+}
+
+button,
+main > form a {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 18px;
+    border: 0;
+    border-radius: 9px;
+    font: inherit;
+    font-weight: 750;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+button {
+    background: var(--forest);
+    color: white;
+}
+
+button:hover {
+    background: var(--forest-dark);
+}
+
+td button {
+    min-height: 34px;
+    padding: 0 12px;
+    background: transparent;
+    border: 1px solid #dfb4b4;
+    color: var(--danger);
+    font-size: 0.88rem;
+}
+
+td button:hover {
+    background: var(--danger);
+    color: white;
+}
+
+td a {
+    font-size: 0.9rem;
+}
+
+main > form {
+    max-width: 760px;
+    padding: clamp(24px, 5vw, 44px);
+    display: grid;
+    gap: 22px;
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    box-shadow: var(--shadow);
+}
+
+main > form div {
+    display: grid;
+    gap: 7px;
+}
+
+label {
+    color: var(--forest);
+    font-weight: 750;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #bdc8c0;
+    border-radius: 9px;
+    background: white;
+    color: var(--text);
+    font: inherit;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--forest);
+    outline: 3px solid rgba(35, 68, 56, 0.14);
+}
+
+textarea {
+    resize: vertical;
+}
+
+main > form div p {
+    margin: 0;
+    color: var(--danger);
+    font-size: 0.9rem;
+}
+
+main > form > a {
+    border: 1px solid var(--border);
+    color: var(--forest);
+}
+
+@media (max-width: 760px) {
+    header {
+        padding: 15px 20px;
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    nav {
+        gap: 16px;
+    }
+
+    main {
+        padding-top: 45px;
+    }
+
+    section {
+        overflow-x: auto;
+    }
+
+    th,
+    td {
+        min-width: 120px;
+    }
+
+    h1 {
+        font-size: 2.8rem;
+    }
+}
