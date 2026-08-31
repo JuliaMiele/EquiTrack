@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.server.ResponseStatusException;
+
 @Controller
 @RequestMapping("/horses")
 public class HorseController {
@@ -40,6 +44,37 @@ public class HorseController {
             return "horses/form";
         }
         horseRepository.save(horse);
+        return "redirect:/horses";
+    }
+
+
+    @GetMapping("/{id}/edit")
+    public String showEditForm(
+        @PathVariable Long id, 
+        Model model) {
+
+            Horse horse = horseRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,
+              "Pferd nicht gefunden" 
+             ));
+
+             model.addAttribute("horse", horse);
+
+        return "horses/form";
+    }
+
+    @PostMapping("/{id}/delete")
+    public String deleteHorse(
+        @PathVariable Long id) {
+
+        if (!horseRepository.existsById(id)) {
+            throw new ResponseStatusException(
+                HttpStatus.NOT_FOUND, 
+                "Pferd nicht gefunden"
+            );
+        }
+        horseRepository.deleteById(id);
         return "redirect:/horses";
     }
 }

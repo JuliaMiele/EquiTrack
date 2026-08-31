@@ -4,7 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Neues Pferd | EquiTrack</title>
+    <title
+        th:text="${horse.id == null
+            ? 'Neues Pferd | EquiTrack'
+            : 'Pferd bearbeiten | EquiTrack'}"
+    >
+        Pferdeprofil | EquiTrack
+    </title>
 </head>
 
 <body>
@@ -18,16 +24,29 @@
     </header>
 
     <main>
-        <h1>Neues Pferd anlegen</h1>
+        <h1
+            th:text="${horse.id == null
+                ? 'Neues Pferd anlegen'
+                : 'Pferd bearbeiten'}"
+        >
+            Pferdeprofil
+        </h1>
 
         <form
             th:action="@{/horses}"
             th:object="${horse}"
             method="post"
         >
+            <input type="hidden" th:field="*{id}">
+
             <div>
                 <label for="name">Name *</label>
-                <input id="name" type="text" th:field="*{name}">
+
+                <input
+                    id="name"
+                    type="text"
+                    th:field="*{name}"
+                >
 
                 <p
                     th:if="${#fields.hasErrors('name')}"
@@ -39,6 +58,7 @@
 
             <div>
                 <label for="birthDate">Geburtsdatum</label>
+
                 <input
                     id="birthDate"
                     type="date"
@@ -55,7 +75,12 @@
 
             <div>
                 <label for="breed">Rasse</label>
-                <input id="breed" type="text" th:field="*{breed}">
+
+                <input
+                    id="breed"
+                    type="text"
+                    th:field="*{breed}"
+                >
             </div>
 
             <div>
@@ -71,7 +96,12 @@
 
             <div>
                 <label for="color">Farbe</label>
-                <input id="color" type="text" th:field="*{color}">
+
+                <input
+                    id="color"
+                    type="text"
+                    th:field="*{color}"
+                >
             </div>
 
             <div>
@@ -112,7 +142,15 @@
                 </p>
             </div>
 
-            <button type="submit">Pferd speichern</button>
+            <button
+                type="submit"
+                th:text="${horse.id == null
+                    ? 'Pferd speichern'
+                    : 'Änderungen speichern'}"
+            >
+                Speichern
+            </button>
+
             <a th:href="@{/horses}">Abbrechen</a>
         </form>
     </main>

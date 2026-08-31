@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>mein Pferd  / meine Pferde| EquiTrack</title>
+    <title>Meine Pferde | EquiTrack</title>
 </head>
 
 <body>
@@ -13,7 +13,7 @@
 
         <nav>
             <a th:href="@{/}">Startseite</a>
-            <a th:href="@{/horses}">mein Pferd / meine Pferde</a>
+            <a th:href="@{/horses}">Meine Pferde</a>
         </nav>
     </header>
 
@@ -45,15 +45,27 @@
                         <th>Geschlecht</th>
                         <th>Farbe</th>
                         <th>Stockmaß</th>
+                        <th>Aktionen</th>
                     </tr>
                 </thead>
 
                 <tbody>
                     <tr th:each="horse : ${horses}">
-                        <td th:text="${horse.name}">Pferdename</td>
-                        <td th:text="${horse.breed}">Rasse</td>
-                        <td th:text="${horse.sex}">Geschlecht</td>
-                        <td th:text="${horse.color}">Farbe</td>
+                        <td th:text="${horse.name}">
+                            Pferdename
+                        </td>
+
+                        <td th:text="${horse.breed}">
+                            Rasse
+                        </td>
+
+                        <td th:text="${horse.sex}">
+                            Geschlecht
+                        </td>
+
+                        <td th:text="${horse.color}">
+                            Farbe
+                        </td>
 
                         <td>
                             <span
@@ -69,6 +81,26 @@
                                 –
                             </span>
                         </td>
+
+                       <td>
+    <a
+        th:href="@{/horses/{id}/edit(id=${horse.id})}"
+    >
+        Bearbeiten
+    </a>
+
+    <form
+        th:action="@{/horses/{id}/delete(id=${horse.id})}"
+        method="post"
+        onsubmit="return confirm(
+            'Möchtest du dieses Pferd wirklich löschen?'
+        )"
+    >
+        <button type="submit">
+            Löschen
+        </button>
+    </form>
+</td>
                     </tr>
                 </tbody>
             </table>
