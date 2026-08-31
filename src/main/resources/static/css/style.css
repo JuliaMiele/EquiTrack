@@ -386,3 +386,73 @@ tr.overdue td:nth-child(5) {
     background: var(--danger);
     color: white;
 }
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.stat-card {
+    min-height: 150px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: #f5f8f4;
+    color: var(--forest);
+    text-decoration: none;
+    transition:
+        transform 160ms ease,
+        box-shadow 160ms ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow);
+}
+
+.stat-number {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 3rem;
+    line-height: 1;
+}
+
+.stat-label {
+    color: var(--muted);
+}
+
+.warning-card {
+    border-color: #e8b8a8;
+    background: #fff0eb;
+}
+
+.warning-card .stat-number {
+    color: var(--danger);
+}
+
+.section-heading {
+    margin-bottom: 25px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.section-heading h2,
+.section-heading p {
+    margin-bottom: 0;
+}
+
+@media (max-width: 760px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}

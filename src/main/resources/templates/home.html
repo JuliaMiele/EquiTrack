@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>EquiTrack – Pferdemanagement</title>
+    <title>EquiTrack</title>
 
     <link rel="stylesheet" href="/css/style.css">
 </head>
@@ -14,8 +14,9 @@
         <a th:href="@{/}">EquiTrack</a>
 
         <nav>
-            <a th:href="@{/}">Startseite</a>
+            <a th:href="@{/}">Dashboard</a>
             <a th:href="@{/horses}">Meine Pferde</a>
+            <a th:href="@{/appointments}">Termine</a>
         </nav>
     </header>
 
@@ -23,38 +24,119 @@
         <section>
             <p>Pferdemanagement einfach gemacht</p>
 
-            <h1>Alles Wichtige zu deinen Pferden an einem Ort.</h1>
+            <h1>Willkommen</h1>
 
             <p>
-                EquiTrack hilft dabei, Pferdeprofile, Termine und
-                Gesundheitsinformationen übersichtlich zu verwalten.
+                Pferdeprofile, Gesundheitsinformationen &
+                Termine übersichtlich an einem Ort.
             </p>
 
-            <a th:href="@{/horses}">
-                Pferdeübersicht öffnen
+            <a th:href="@{/horses/new}">
+                Neues Pferd anlegen
             </a>
         </section>
 
         <section>
-            <h2>Was EquiTrack bietet</h2>
+            <h2>Deine Übersicht</h2>
 
-            <ul>
-                <li>Pferdeprofile zentral verwalten</li>
-                <li>Stammdaten & Besonderheiten dokumentieren</li>
-                <li>Profile jederzeit bearbeiten</li>
-                <li>Daten dauerhaft lokal speichern</li>
-            </ul>
+            <div class="dashboard-grid">
+                <a class="stat-card" th:href="@{/horses}">
+                    <span class="stat-number" th:text="${horseCount}">
+                        0
+                    </span>
+
+                    <span class="stat-label">
+                        Pferde
+                    </span>
+                </a>
+
+                <a class="stat-card" th:href="@{/appointments}">
+                    <span
+                        class="stat-number"
+                        th:text="${openAppointmentCount}"
+                    >
+                        0
+                    </span>
+
+                    <span class="stat-label">
+                        Offene Termine
+                    </span>
+                </a>
+
+                <a
+                    class="stat-card warning-card"
+                    th:href="@{/appointments}"
+                >
+                    <span
+                        class="stat-number"
+                        th:text="${overdueAppointmentCount}"
+                    >
+                        0
+                    </span>
+
+                    <span class="stat-label">
+                        Überfällige Termine
+                    </span>
+                </a>
+            </div>
         </section>
 
         <section>
-            <h2>Als Nächstes geplant</h2>
+            <div class="section-heading">
+                <div>
+                    <p>Nächste Schritte</p>
+                    <h2>Anstehende Termine</h2>
+                </div>
 
-            <p>
-                Im nächsten Entwicklungsschritt werden Tierarzt-,
-                Hufschmied- und Impftermine ergänzt. Überfällige
-                Termine sollen anschließend automatisch hervorgehoben
-                werden.
-            </p>
+                <a th:href="@{/appointments/new}">
+                    Termin anlegen
+                </a>
+            </div>
+
+            <div th:if="${upcomingAppointments.isEmpty()}">
+                <p>
+                    Aktuell stehen keine offenen zukünftigen
+                    Termine an.
+                </p>
+            </div>
+
+            <table th:unless="${upcomingAppointments.isEmpty()}">
+                <thead>
+                    <tr>
+                        <th>Datum</th>
+                        <th>Pferd</th>
+                        <th>Terminart</th>
+                        <th>Notizen</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr
+                        th:each="appointment : ${upcomingAppointments}"
+                    >
+                        <td
+                            th:text="${#temporals.format(
+                                appointment.appointmentDate,
+                                'dd.MM.yyyy'
+                            )}"
+                        >
+                            31.08.2026
+                        </td>
+
+                        <td th:text="${appointment.horse.name}">
+                            Pferdename
+                        </td>
+
+                        <td th:text="${appointment.type}">
+                            Tierarzt
+                        </td>
+
+                        <td th:text="${appointment.notes}">
+                            Notiz
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </section>
     </main>
 </body>
