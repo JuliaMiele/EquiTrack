@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Termine | EquiTrack</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <header>
+        <a th:href="@{/}">EquiTrack</a>
+
+        <nav>
+            <a th:href="@{/}">Startseite</a>
+            <a th:href="@{/horses}">Meine Pferde</a>
+            <a th:href="@{/appointments}">Termine</a>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <p>Terminverwaltung</p>
+            <h1>Alle Termine</h1>
+
+            <a th:href="@{/appointments/new}">
+                Neuen Termin anlegen
+            </a>
+        </section>
+
+        <section th:if="${appointments.isEmpty()}">
+            <h2>Noch keine Termine vorhanden</h2>
+
+            <p>
+                Lege den ersten Tierarzt-, Hufschmied- oder
+                Impftermin für eines deiner Pferde an.
+            </p>
+        </section>
+
+        <section th:unless="${appointments.isEmpty()}">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Datum</th>
+                        <th>Pferd</th>
+                        <th>Terminart</th>
+                        <th>Notizen</th>
+                        <th>Status</th>
+                        <th>Aktionen</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr
+                        th:each="appointment : ${appointments}"
+                        th:classappend="${!appointment.completed
+                            and appointment.appointmentDate.isBefore(today)}
+                            ? 'overdue'
+                            : ''"
+                    >
+                        <td
+                            th:text="${#temporals.format(
+                                appointment.appointmentDate,
+                                'dd.MM.yyyy'
+                            )}"
+                        >
+                            31.08.2026
+                        </td>
+
+                        <td th:text="${appointment.horse.name}">
+                            Pferdename
+                        </td>
+
+                        <td th:text="${appointment.type}">
+                            Tierarzt
+                        </td>
+
+                        <td th:text="${appointment.notes}">
+                            Notiz
+                        </td>
+
+                        <td>
+                            <span th:if="${appointment.completed}">
+                                Erledigt
+                            </span>
+
+                            <span
+                                th:if="${!appointment.completed
+                                    and appointment.appointmentDate.isBefore(today)}"
+                            >
+                                Überfällig
+                            </span>
+
+                            <span
+                                th:if="${!appointment.completed
+                                    and !appointment.appointmentDate.isBefore(today)}"
+                            >
+                                Offen
+                            </span>
+                        </td>
+
+                        <td>
+                            <form
+                                th:action="@{/appointments/{id}/toggle(
+                                    id=${appointment.id}
+                                )}"
+                                method="post"
+                            >
+                                <button
+                                    type="submit"
+                                    th:text="${appointment.completed
+                                        ? 'Wieder öffnen'
+                                        : 'Als erledigt markieren'}"
+                                >
+                                    Status ändern
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+</body>
+</html>

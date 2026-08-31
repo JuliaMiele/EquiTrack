@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Neuer Termin | EquiTrack</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <header>
+        <a th:href="@{/}">EquiTrack</a>
+
+        <nav>
+            <a th:href="@{/}">Startseite</a>
+            <a th:href="@{/horses}">Meine Pferde</a>
+            <a th:href="@{/appointments}">Termine</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Neuen Termin anlegen</h1>
+
+        <form
+            th:action="@{/appointments}"
+            th:object="${appointment}"
+            method="post"
+        >
+            <div>
+                <label for="horseId">Pferd *</label>
+
+                <select id="horseId" name="horseId" required>
+                    <option value="">Bitte auswählen</option>
+
+                    <option
+                        th:each="horse : ${horses}"
+                        th:value="${horse.id}"
+                        th:text="${horse.name}"
+                        th:selected="${horse.id == selectedHorseId}"
+                    >
+                        Pferdename
+                    </option>
+                </select>
+
+                <p
+                    th:if="${horseError != null}"
+                    th:text="${horseError}"
+                >
+                    Bitte wähle ein Pferd aus.
+                </p>
+            </div>
+
+            <div>
+                <label for="type">Terminart *</label>
+
+                <select id="type" th:field="*{type}">
+                    <option value="">Bitte auswählen</option>
+                    <option value="Tierarzt">Tierarzt</option>
+                    <option value="Hufschmied">Hufschmied</option>
+                    <option value="Impfung">Impfung</option>
+                    <option value="Zahnarzt">Zahnarzt</option>
+                    <option value="Training">Training</option>
+                    <option value="Sonstiges">Sonstiges</option>
+                </select>
+
+                <p
+                    th:if="${#fields.hasErrors('type')}"
+                    th:errors="*{type}"
+                >
+                    Fehler bei der Terminart
+                </p>
+            </div>
+
+            <div>
+                <label for="appointmentDate">Datum *</label>
+
+                <input
+                    id="appointmentDate"
+                    type="date"
+                    th:field="*{appointmentDate}"
+                >
+
+                <p
+                    th:if="${#fields.hasErrors('appointmentDate')}"
+                    th:errors="*{appointmentDate}"
+                >
+                    Fehler beim Datum
+                </p>
+            </div>
+
+            <div>
+                <label for="notes">Notizen</label>
+
+                <textarea
+                    id="notes"
+                    rows="5"
+                    maxlength="1000"
+                    th:field="*{notes}"
+                ></textarea>
+
+                <p
+                    th:if="${#fields.hasErrors('notes')}"
+                    th:errors="*{notes}"
+                >
+                    Fehler bei den Notizen
+                </p>
+            </div>
+
+            <button type="submit">Termin speichern</button>
+            <a th:href="@{/appointments}">Abbrechen</a>
+        </form>
+    </main>
+</body>
+</html>

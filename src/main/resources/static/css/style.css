@@ -299,3 +299,31 @@ main > form > a {
         font-size: 2.8rem;
     }
 }
+
+th:last-child,
+td:last-child {
+    min-width: 210px;
+}
+
+td form {
+    display: inline-block;
+    margin-left: 0;
+}
+
+td button {
+    white-space: nowrap;
+}
+
+tr.overdue {
+    background: #fff0eb;
+}
+
+tr.overdue:hover {
+    background: #ffe5dc;
+}
+
+tr.overdue td:first-child,
+tr.overdue td:nth-child(5) {
+    color: var(--danger);
+    font-weight: 800;
+}
