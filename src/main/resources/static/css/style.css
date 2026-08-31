@@ -327,3 +327,62 @@ tr.overdue td:nth-child(5) {
     color: var(--danger);
     font-weight: 800;
 }
+
+.action-group {
+    min-width: 290px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.action-group form {
+    display: inline-flex;
+    margin: 0;
+}
+
+.action-button {
+    min-height: 38px;
+    padding: 0 13px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid transparent;
+    border-radius: 9px;
+    font-size: 0.86rem;
+    font-weight: 750;
+    line-height: 1;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.action-edit {
+    border-color: var(--forest);
+    background: transparent;
+    color: var(--forest);
+}
+
+.action-edit:hover {
+    background: var(--forest);
+    color: white;
+}
+
+.action-complete {
+    border-color: var(--forest);
+    background: var(--forest);
+    color: white;
+}
+
+.action-complete:hover {
+    background: var(--forest-dark);
+}
+
+.action-delete {
+    border-color: #dfaaaa;
+    background: transparent;
+    color: var(--danger);
+}
+
+.action-delete:hover {
+    background: var(--danger);
+    color: white;
+}

@@ -8,6 +8,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
@@ -26,6 +27,7 @@ private Long id;
 private String name;
 
 @Past(message = "Das Geburtsdatum muss in der Vergangenheit liegen")
+@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 private LocalDate birthDate;
 
 private String breed;

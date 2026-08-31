@@ -120,4 +120,25 @@ public class AppointmentController {
         
         return "redirect:/appointments";
     }
+
+    @GetMapping("/{id}/edit")
+public String showEditForm(
+        @PathVariable Long id,
+        Model model) {
+
+    Appointment appointment = appointmentRepository.findById(id)
+        .orElseThrow(() -> new ResponseStatusException(
+            HttpStatus.NOT_FOUND,
+            "Termin nicht gefunden"
+        ));
+
+    model.addAttribute("appointment", appointment);
+    model.addAttribute("horses", horseRepository.findAll());
+    model.addAttribute(
+        "selectedHorseId",
+        appointment.getHorse().getId()
+    );
+
+    return "appointments/form";
+}
 }

@@ -101,36 +101,55 @@
                             </span>
                         </td>
 <td>
-    <form
-        th:action="@{/appointments/{id}/toggle(
-            id=${appointment.id}
-        )}"
-        method="post"
-    >
-        <button
-            type="submit"
-            th:text="${appointment.completed
-                ? 'Wieder öffnen'
-                : 'Erledigen'}"
-        >
-            Status ändern
-        </button>
-    </form>
+    
 
-    <form
-        th:action="@{/appointments/{id}/delete(
-            id=${appointment.id}
-        )}"
-        method="post"
-        onsubmit="return confirm(
-            'Möchtest du diesen Termin wirklich löschen?'
-        )"
-    >
-        <button type="submit">
-            Löschen
-        </button>
-    </form>
+    <td>
+    <div class="action-group">
+        <a
+            class="action-button action-edit"
+            th:href="@{/appointments/{id}/edit(
+                id=${appointment.id}
+            )}"
+        >
+            Bearbeiten
+        </a>
+
+        <form
+            th:action="@{/appointments/{id}/toggle(
+                id=${appointment.id}
+            )}"
+            method="post"
+        >
+            <button
+                class="action-button action-complete"
+                type="submit"
+                th:text="${appointment.completed
+                    ? 'Wieder öffnen'
+                    : 'Erledigen'}"
+            >
+                Status ändern
+            </button>
+        </form>
+
+        <form
+            th:action="@{/appointments/{id}/delete(
+                id=${appointment.id}
+            )}"
+            method="post"
+            onsubmit="return confirm(
+                'Möchtest du diesen Termin wirklich löschen?'
+            )"
+        >
+            <button
+                class="action-button action-delete"
+                type="submit"
+            >
+                Löschen
+            </button>
+        </form>
+    </div>
 </td>
+
  
                     </tr>
                 </tbody>

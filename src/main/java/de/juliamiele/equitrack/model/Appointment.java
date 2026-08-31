@@ -11,6 +11,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
@@ -27,6 +28,7 @@ public class Appointment {
     private String type;
 
     @NotNull(message = "Bitte gib ein Datum ein")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate appointmentDate;
 
     @Size(max = 1000, message = "Die Beschreibung darf maximal 1000 Zeichen lang sein")
@@ -34,7 +36,7 @@ public class Appointment {
 
     private boolean completed;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "horse_id", nullable = false)
     private Horse horse;
 

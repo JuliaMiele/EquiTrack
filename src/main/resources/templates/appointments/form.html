@@ -4,7 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Neuer Termin | EquiTrack</title>
+    <title
+        th:text="${appointment.id == null
+            ? 'Neuer Termin | EquiTrack'
+            : 'Termin bearbeiten | EquiTrack'}"
+    >
+        Termin | EquiTrack
+    </title>
 
     <link rel="stylesheet" href="/css/style.css">
 </head>
@@ -21,13 +27,22 @@
     </header>
 
     <main>
-        <h1>Neuen Termin anlegen</h1>
+        <h1
+            th:text="${appointment.id == null
+                ? 'Neuen Termin anlegen'
+                : 'Termin bearbeiten'}"
+        >
+            Termin
+        </h1>
 
         <form
             th:action="@{/appointments}"
             th:object="${appointment}"
             method="post"
         >
+            <input type="hidden" th:field="*{id}">
+            <input type="hidden" th:field="*{completed}">
+
             <div>
                 <label for="horseId">Pferd *</label>
 
@@ -108,7 +123,15 @@
                 </p>
             </div>
 
-            <button type="submit">Termin speichern</button>
+            <button
+                type="submit"
+                th:text="${appointment.id == null
+                    ? 'Termin speichern'
+                    : 'Änderungen speichern'}"
+            >
+                Speichern
+            </button>
+
             <a th:href="@{/appointments}">Abbrechen</a>
         </form>
     </main>
