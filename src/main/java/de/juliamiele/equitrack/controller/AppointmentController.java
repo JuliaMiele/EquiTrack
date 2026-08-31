@@ -105,4 +105,19 @@ public class AppointmentController {
 
         return "redirect:/appointments";
     }
+
+    @PostMapping("/{id}/delete")
+    public String deleteAppointment(@PathVariable Long id) {
+
+        if(!appointmentRepository.existsById(id)) {
+            throw new ResponseStatusException(
+                HttpStatus.NOT_FOUND,
+                "Termin nicht gefunden"
+            );
+        }
+        
+        appointmentRepository.deleteById(id);
+        
+        return "redirect:/appointments";
+    }
 }
