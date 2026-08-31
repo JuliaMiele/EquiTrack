@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>mein Pferd  / meine Pferde| EquiTrack</title>
+</head>
+
+<body>
+    <header>
+        <a th:href="@{/}">EquiTrack</a>
+
+        <nav>
+            <a th:href="@{/}">Startseite</a>
+            <a th:href="@{/horses}">mein Pferd / meine Pferde</a>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <p>Pferdeverwaltung</p>
+            <h1>Meine Pferde</h1>
+
+            <a th:href="@{/horses/new}">
+                Neues Pferd anlegen
+            </a>
+        </section>
+
+        <section th:if="${horses.isEmpty()}">
+            <h2>Noch keine Pferde vorhanden</h2>
+
+            <p>
+                Lege dein erstes Pferdeprofil an, um wichtige
+                Informationen an einem Ort zu verwalten.
+            </p>
+        </section>
+
+        <section th:unless="${horses.isEmpty()}">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Rasse</th>
+                        <th>Geschlecht</th>
+                        <th>Farbe</th>
+                        <th>Stockmaß</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr th:each="horse : ${horses}">
+                        <td th:text="${horse.name}">Pferdename</td>
+                        <td th:text="${horse.breed}">Rasse</td>
+                        <td th:text="${horse.sex}">Geschlecht</td>
+                        <td th:text="${horse.color}">Farbe</td>
+
+                        <td>
+                            <span
+                                th:if="${horse.heightInCentimeters != null}"
+                                th:text="${horse.heightInCentimeters + ' cm'}"
+                            >
+                                165 cm
+                            </span>
+
+                            <span
+                                th:unless="${horse.heightInCentimeters != null}"
+                            >
+                                –
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Neues Pferd | EquiTrack</title>
+</head>
+
+<body>
+    <header>
+        <a th:href="@{/}">EquiTrack</a>
+
+        <nav>
+            <a th:href="@{/}">Startseite</a>
+            <a th:href="@{/horses}">Meine Pferde</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Neues Pferd anlegen</h1>
+
+        <form
+            th:action="@{/horses}"
+            th:object="${horse}"
+            method="post"
+        >
+            <div>
+                <label for="name">Name *</label>
+                <input id="name" type="text" th:field="*{name}">
+
+                <p
+                    th:if="${#fields.hasErrors('name')}"
+                    th:errors="*{name}"
+                >
+                    Fehler beim Namen
+                </p>
+            </div>
+
+            <div>
+                <label for="birthDate">Geburtsdatum</label>
+                <input
+                    id="birthDate"
+                    type="date"
+                    th:field="*{birthDate}"
+                >
+
+                <p
+                    th:if="${#fields.hasErrors('birthDate')}"
+                    th:errors="*{birthDate}"
+                >
+                    Fehler beim Geburtsdatum
+                </p>
+            </div>
+
+            <div>
+                <label for="breed">Rasse</label>
+                <input id="breed" type="text" th:field="*{breed}">
+            </div>
+
+            <div>
+                <label for="sex">Geschlecht</label>
+
+                <select id="sex" th:field="*{sex}">
+                    <option value="">Bitte auswählen</option>
+                    <option value="Stute">Stute</option>
+                    <option value="Wallach">Wallach</option>
+                    <option value="Hengst">Hengst</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="color">Farbe</label>
+                <input id="color" type="text" th:field="*{color}">
+            </div>
+
+            <div>
+                <label for="heightInCentimeters">
+                    Stockmaß in Zentimetern
+                </label>
+
+                <input
+                    id="heightInCentimeters"
+                    type="number"
+                    min="1"
+                    th:field="*{heightInCentimeters}"
+                >
+
+                <p
+                    th:if="${#fields.hasErrors('heightInCentimeters')}"
+                    th:errors="*{heightInCentimeters}"
+                >
+                    Fehler beim Stockmaß
+                </p>
+            </div>
+
+            <div>
+                <label for="notes">Notizen</label>
+
+                <textarea
+                    id="notes"
+                    rows="5"
+                    maxlength="1000"
+                    th:field="*{notes}"
+                ></textarea>
+
+                <p
+                    th:if="${#fields.hasErrors('notes')}"
+                    th:errors="*{notes}"
+                >
+                    Fehler bei den Notizen
+                </p>
+            </div>
+
+            <button type="submit">Pferd speichern</button>
+            <a th:href="@{/horses}">Abbrechen</a>
+        </form>
+    </main>
+</body>
+</html>
