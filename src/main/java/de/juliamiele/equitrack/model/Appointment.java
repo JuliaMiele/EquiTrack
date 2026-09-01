@@ -87,4 +87,13 @@ public class Appointment {
     public void setHorse(Horse horse) {
         this.horse = horse;
     }
+
+    public boolean isOverdue(LocalDate today) {
+
+    if (completed || appointmentDate == null) {
+        return false;
+    }
+
+    return appointmentDate.isBefore(today);
+}
 }

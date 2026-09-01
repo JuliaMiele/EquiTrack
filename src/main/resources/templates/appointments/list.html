@@ -54,11 +54,9 @@
 
                 <tbody>
                     <tr
-                        th:each="appointment : ${appointments}"
-                        th:classappend="${!appointment.completed
-                            and appointment.appointmentDate.isBefore(today)}
-                            ? 'overdue'
-                            : ''"
+                     th:classappend="${appointment.isOverdue(today)}
+    ? 'overdue'
+    : ''"
                     >
                         <td
                             th:text="${#temporals.format(
@@ -87,23 +85,19 @@
                             </span>
 
                             <span
-                                th:if="${!appointment.completed
-                                    and appointment.appointmentDate.isBefore(today)}"
+                                th:if="${appointment.isOverdue(today)}"
                             >
                                 Überfällig
                             </span>
 
                             <span
                                 th:if="${!appointment.completed
-                                    and !appointment.appointmentDate.isBefore(today)}"
+                                    and !appointment.isOverdue(today)}"
                             >
                                 Offen
                             </span>
                         </td>
 <td>
-    
-
-    <td>
     <div class="action-group">
         <a
             class="action-button action-edit"
